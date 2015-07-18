@@ -5,6 +5,10 @@
 #ifdef __cplusplus
 extern "C"
 {
+	#ifndef INT64_C
+	#define INT64_C
+	#define UINT64_C
+	#endif
 	#include <libavcodec/avcodec.h>
 	#include <libavformat/avformat.h>
 	#include <libswscale/swscale.h>
@@ -178,7 +182,8 @@ int main(int argc, char* argv[])
 				pFrame->data[2] += pFrame->linesize[2] * (pCodecCtx->height / 2 - 1);
 				pFrame->linesize[2] *= -1;
 
-				printf("get one picture. pts:%ld, pkt_pts:%ld, pkt_dts:%ld\n", pFrame->pts, pFrame->pkt_pts, pFrame->pkt_dts);
+				printf("get one picture. pts:%"PRId64", pkt_pts:%"PRId64", pkt_dts:%"PRId64"\n",
+					pFrame->pts, pFrame->pkt_pts, pFrame->pkt_dts);
 				sws_scale(img_convert_ctx, pFrame->data, pFrame->linesize,
 					0, pCodecCtx->height, pFrameRGB->data, pFrameRGB->linesize);
 				SaveAsBMP (pFrameRGB, pCodecCtx->width, pCodecCtx->height, count, 24);

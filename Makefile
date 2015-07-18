@@ -3,7 +3,8 @@ TARGET_FOLDER    = ./output
 EXECUTABLE       = video2pic
 SRC_FILES        = video2pic.cpp
 LINK_LIBS        = -lavformat -lavcodec -lavutil -lswscale -lopencv_highgui -lopencv_core
-CXXFLAGS        += -g
+# learn -D__STDC_FORMAT_MACROS, see http://blog.csdn.net/win_lin/article/details/7912693
+CXXFLAGS        += -g -D__STDC_FORMAT_MACROS 
 
 all:
 	mkdir -p $(TARGET_FOLDER)
